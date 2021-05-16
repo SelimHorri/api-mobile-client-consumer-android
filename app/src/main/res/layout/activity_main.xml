@@ -13,7 +13,7 @@
         android:layout_marginTop="88dp"
         android:text="Hello World!"
         android:textColor="@color/purple_700"
-        android:textSize="24sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
