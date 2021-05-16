@@ -5,21 +5,21 @@ public final class Credential {
     private Integer userId;
     private String username;
     private String password;
-    private String enabled;
+    private Boolean enabled;
     private String role;
 
     public Credential() {
 
     }
 
-    public Credential(String username, String password, String enabled, String role) {
+    public Credential(String username, String password, Boolean enabled, String role) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.role = role;
     }
 
-    public Credential(Integer userId, String username, String password, String enabled, String role) {
+    public Credential(Integer userId, String username, String password, Boolean enabled, String role) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -62,11 +62,11 @@ public final class Credential {
         this.password = password;
     }
 
-    public String getEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 

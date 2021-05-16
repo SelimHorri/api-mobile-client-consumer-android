@@ -22,13 +22,13 @@ import java.util.NoSuchElementException;
 
 public class CredentialService {
 
-    private static String url = "https://project-tracking-system-heroku.herokuapp.com/app/api";
+    private String url = "https://project-tracking-system-heroku.herokuapp.com/app/api";
     private Context context;
     private RequestQueue requestQueue;
     private JsonObjectRequest jsonObjectRequest;
 
     public CredentialService(final Context context) {
-        url += "/userCredentials";
+        this.url += "/userCredentials";
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
@@ -50,12 +50,12 @@ public class CredentialService {
                             credential.setUserId(jsonUserCredentials.getJSONObject(i).getInt("userId"));
                             credential.setUsername(jsonUserCredentials.getJSONObject(i).getString("username"));
                             credential.setPassword(jsonUserCredentials.getJSONObject(i).getString("password"));
-                            credential.setEnabled(jsonUserCredentials.getJSONObject(i).getString("enabled"));
+                            credential.setEnabled(jsonUserCredentials.getJSONObject(i).getBoolean("enabled"));
                             credential.setRole(jsonUserCredentials.getJSONObject(i).getString("role"));
 
                             list.add(credential);
                         }
-                        credentialList.setCredentials(Arrays.asList(credential));
+                        credentialList.setCredentials(list);
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -63,6 +63,8 @@ public class CredentialService {
                 },
                 (error) -> Toast.makeText(this.context, "#### ERROR ####", Toast.LENGTH_LONG).show()
         );
+
+        this.requestQueue.add(this.jsonObjectRequest);
 
         return credentialList;
     }

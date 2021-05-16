@@ -13,10 +13,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.selimhorri.pack.model.Credential;
+import com.selimhorri.pack.model.CredentialList;
+import com.selimhorri.pack.service.CredentialService;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private CredentialService credentialService;
 
     private TextView textView;
     private Button button;
@@ -26,12 +33,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.credentialService = new CredentialService(MainActivity.this);
         this.textView = super.findViewById(R.id.textViewDisplayer);
         this.button = super.findViewById(R.id.btnApiCall);
 
         final String url = "https://project-tracking-system-heroku.herokuapp.com/app/api/userCredentials";
         this.button.setOnClickListener(v -> {
 
+            /*
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -42,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
             );
 
             requestQueue.add(jsonObjectRequest);
+            */
+
+            final CredentialList credentialList = this.credentialService.findAll();
+            final String username = credentialList.getCredentials().get(0).getUsername();
+            this.textView.setText(username);
 
         });
 
